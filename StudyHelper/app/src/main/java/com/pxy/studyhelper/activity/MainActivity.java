@@ -1,5 +1,6 @@
-package com.pxy.studyhelper;
+package com.pxy.studyhelper.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -13,9 +14,9 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
-public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+import com.pxy.studyhelper.R;
 
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -77,12 +78,12 @@ public class MainActivity extends AppCompatActivity
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
+        // 处理侧滑菜单点击事件
         int id = item.getItemId();
-
         if (id == R.id.nav_camera) {
-            // Handle the camera action
+            startActivity(new Intent(MainActivity.this,LoginActivity2.class));
         } else if (id == R.id.nav_gallery) {
+            startActivity(new Intent(MainActivity.this,LoginActivity.class));
 
         } else if (id == R.id.nav_slideshow) {
 
@@ -93,7 +94,7 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_send) {
 
         }
-
+        //关闭侧滑菜单
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;

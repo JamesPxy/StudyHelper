@@ -5,31 +5,35 @@
         <item
             android:id="@+id/nav_camera"
             android:icon="@drawable/ic_menu_camera"
-            android:title="Import"/>
+            android:title="试题中心"/>
         <item
             android:id="@+id/nav_gallery"
             android:icon="@drawable/ic_menu_gallery"
-            android:title="Gallery"/>
+            android:title="我的收藏"/>
         <item
             android:id="@+id/nav_slideshow"
             android:icon="@drawable/ic_menu_slideshow"
-            android:title="Slideshow"/>
+            android:title="我的错题"/>
         <item
             android:id="@+id/nav_manage"
             android:icon="@drawable/ic_menu_manage"
-            android:title="Tools"/>
+            android:title="挑战自我"/>
     </group>
 
-    <item android:title="Communicate">
+    <item android:title="个性设置">
         <menu>
+            <item
+                android:id="@+id/nav_setting"
+                android:icon="@drawable/icon_setting_nor"
+                android:title="我的设置"/>
             <item
                 android:id="@+id/nav_share"
                 android:icon="@drawable/ic_menu_share"
-                android:title="Share"/>
+                android:title="一键分享"/>
             <item
                 android:id="@+id/nav_send"
                 android:icon="@drawable/ic_menu_send"
-                android:title="Send"/>
+                android:title="检查升级"/>
         </menu>
     </item>
 
