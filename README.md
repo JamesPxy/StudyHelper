@@ -1,7 +1,4 @@
 # StudyHelper
 pxy  
-
-
-why  me
-  king  james
+project  start  from  2016-01-23
 
