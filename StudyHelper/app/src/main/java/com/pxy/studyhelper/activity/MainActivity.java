@@ -81,7 +81,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         // 处理侧滑菜单点击事件
         int id = item.getItemId();
         if (id == R.id.nav_camera) {
-            startActivity(new Intent(MainActivity.this,LoginActivity2.class));
+            startActivity(new Intent(MainActivity.this,LoginActivity.class));
         } else if (id == R.id.nav_gallery) {
             startActivity(new Intent(MainActivity.this,LoginActivity.class));
 
