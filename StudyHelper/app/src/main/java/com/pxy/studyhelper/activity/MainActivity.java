@@ -90,6 +90,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         } else if (id == R.id.nav_manage) {
 
         } else if (id == R.id.nav_share) {
+//            startActivity(new Intent(MainActivity.this,RegisterAcivity.class));
 
         } else if (id == R.id.nav_send) {
 
