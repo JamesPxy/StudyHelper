@@ -3,8 +3,21 @@
     <color name="colorPrimary">#04bfb8</color>
     <color name="colorPrimaryDark">#8387a0</color>
     <color name="colorAccent">#FF4081</color>
-    <color name="gray">#11A781</color>
     <color name="light_blue">#AA66CC</color>
     <color name="dark_blue">#9933CC</color>
     <color name="orange">#99CC00</color>
+
+
+    <color name="whiteBg">#FFFFFF</color> <!-- 白色 -->
+    <color name="gray">#808080</color> <!-- 灰色 -->
+    <color name="black">#000000</color> <!-- 黑色 -->
+    <color name="lbg">#F2F2F2</color> <!-- 登录背景色 -->
+    <color name="loginBg">#1AA19A</color> <!-- 登录按钮色 -->
+    <color name="yunColor">#1FB8AD</color> <!-- 云平台字体颜色 -->
+    <color name="usrmidpwd">#F6F6F6</color> <!-- 账号密码中间灰 -->
+    <color name="regcolor">#127F79</color> <!-- 用户注册颜色 -->
+    <color name="greenBg">#04C0B9</color>
+    <color name="edittext_hint_color">#d9d9d9</color>
+    <color name="reg_toptagtext_color">#595555</color>
+
 </resources>
