@@ -2,6 +2,8 @@ package com.pxy.studyhelper;
 
 import android.app.Application;
 
+import com.pxy.studyhelper.entity.User;
+
 import org.xutils.x;
 
 import cn.bmob.v3.Bmob;
@@ -14,6 +16,7 @@ import cn.bmob.v3.Bmob;
  */
 public class MyApplication  extends Application {
 
+    public static User  mCurrentUser;
     @Override
     public void onCreate() {
         super.onCreate();

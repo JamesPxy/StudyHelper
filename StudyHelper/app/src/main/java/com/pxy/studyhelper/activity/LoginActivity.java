@@ -8,7 +8,9 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.pxy.studyhelper.MyApplication;
 import com.pxy.studyhelper.R;
+import com.pxy.studyhelper.entity.User;
 
 import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.Event;
@@ -18,7 +20,9 @@ import org.xutils.x;
 import cn.bmob.v3.BmobUser;
 import cn.bmob.v3.listener.SaveListener;
 
-@ContentView(value = R.layout.my_login)
+import static cn.bmob.v3.BmobUser.getCurrentUser;
+
+@ContentView(value = R.layout.activity_login)
 public class LoginActivity extends Activity {
 
     @ViewInject(value = R.id.username)
@@ -29,7 +33,6 @@ public class LoginActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        setContentView(R.layout.my_login);
         x.view().inject(this);
     }
 
@@ -48,10 +51,12 @@ public class LoginActivity extends Activity {
         bu.login(this, new SaveListener() {
             @Override
             public void onSuccess() {
+                //给当前用户赋值
+                MyApplication.mCurrentUser= getCurrentUser(LoginActivity.this,User.class);
                 Toast.makeText(LoginActivity.this, "登录成功...", Toast.LENGTH_SHORT).show();
-                startActivity(new Intent(LoginActivity.this,MainActivity.class));
+                startActivity(new Intent(LoginActivity.this, MainActivity.class));
+//                finish();
             }
-
             @Override
             public void onFailure(int code, String msg) {
                 Toast.makeText(LoginActivity.this, "登录失败..." + code + "---" + msg, Toast.LENGTH_SHORT).show();
@@ -65,8 +70,13 @@ public class LoginActivity extends Activity {
             case R.id.tv_register:
                 startActivity(new Intent(LoginActivity.this,RegisterActivity.class));
                 break;
-            case R.id.tv_forget_pwd:break;
-            case R.id.tv_see_first:break;
+            case R.id.tv_forget_pwd:
+//                Toast.makeText(LoginActivity.this, "有待继续开发...", Toast.LENGTH_SHORT).show();
+           LoadingDialog.showLoadingDialog(LoginActivity.this);
+                break;
+            case R.id.tv_see_first:
+                startActivity(new Intent(LoginActivity.this,MainActivity.class));
+                break;
         }
     }
 

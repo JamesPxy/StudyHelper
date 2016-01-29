@@ -1,10 +1,11 @@
 <resources>
-    <string name="app_name">中医学习助手</string>
+    <!--<string name="app_name">中医学习助手</string>-->
+    <string name="app_name">酷校</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
-    <string name="action_settings">Settings</string>
+    <string name="action_settings">设置</string>
     <string name="title_activity_login">登录</string>
 
     <!-- Strings related to login -->
@@ -18,14 +19,14 @@
     <string name="error_field_required">This field is required</string>
     <string name="title_activity_login2">LoginActivity2</string>
 
-    <string name="register">新用户注册</string>
-    <string name="usrHint">请输入用户名</string>
-    <string name="pwdHint">请输入6-16位字母或数字密码</string>
+    <string name="register">新用户注册>></string>
+    <string name="usrHint">请输入手机号或邮箱</string>
+    <string name="pwdHint">请输入密码</string>
     <string name="regUsrtips">请输入手机号码</string>
-    <string name="regUsrtips_emai">请输入邮箱号</string>
-    <string name="regPwdtips">请输入6-16位字母或数字密码</string>
-    <string name="regBtn">提交</string>
-    <string name="forgetPwd">忘记密码</string>
+    <string name="regUsrtips_emai">请输入邮箱账号</string>
+    <string name="regPwdtips">请输入6-16位密码</string>
+    <string name="regBtn">注册</string>
+    <string name="forgetPwd">忘记密码>></string>
     <string name="firstSee">精彩内容，先睹为快 ></string>
     <string name="loginBtn">登录</string>
     <string name="title_activity_mylogin">Mylogin</string>
