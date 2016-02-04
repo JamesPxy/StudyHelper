@@ -1,6 +1,6 @@
 <resources>
     <!--<string name="app_name">中医学习助手</string>-->
-    <string name="app_name">酷校</string>
+    <string name="app_name">酷学</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
@@ -27,7 +27,7 @@
     <string name="regPwdtips">请输入6-16位密码</string>
     <string name="regBtn">注册</string>
     <string name="forgetPwd">忘记密码>></string>
-    <string name="firstSee">精彩内容，先睹为快 ></string>
+    <string name="firstSee">精彩内容，先睹为快>></string>
     <string name="loginBtn">登录</string>
     <string name="title_activity_mylogin">Mylogin</string>
 

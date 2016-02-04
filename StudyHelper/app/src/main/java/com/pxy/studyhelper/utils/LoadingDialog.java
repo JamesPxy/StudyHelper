@@ -1,4 +1,4 @@
-package com.pxy.studyhelper.activity;
+package com.pxy.studyhelper.utils;
 
 import android.app.AlertDialog;
 import android.content.Context;

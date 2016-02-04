@@ -12,7 +12,7 @@ import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import com.pxy.studyhelper.R;
-import com.pxy.studyhelper.entity.Tools;
+import com.pxy.studyhelper.utils.Tools4Sure;
 import com.pxy.studyhelper.entity.User;
 
 import org.xutils.view.annotation.ContentView;
@@ -81,13 +81,13 @@ public class RegisterActivity extends Activity {
         }
         //  校验  手机号 邮箱
         if(isEmail){
-            if(!Tools.isValidEmail(userName)){
+            if(!Tools4Sure.isValidEmail(userName)){
                 edt_user.setError("邮箱格式错误...");
                 return;
             }
             user.setEmail(userName);
         }else{
-            if(!Tools.isRightMobilePhoe(userName)){
+            if(!Tools4Sure.isRightMobilePhoe(userName)){
                 edt_user.setError("手机号格式错误...");
                 return;
             }

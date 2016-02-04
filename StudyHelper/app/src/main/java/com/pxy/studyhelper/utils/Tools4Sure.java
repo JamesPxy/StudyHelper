@@ -1,4 +1,4 @@
-package com.pxy.studyhelper.entity;
+package com.pxy.studyhelper.utils;
 
 import android.content.Context;
 import android.content.pm.PackageManager;
@@ -10,7 +10,7 @@ import java.util.regex.Pattern;
 /**
  * @author pxy
  */
-public class Tools {
+public class Tools4Sure {
 
     public static boolean isMobileNO(String mobiles) {
         /*

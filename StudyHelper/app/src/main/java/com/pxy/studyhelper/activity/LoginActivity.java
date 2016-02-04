@@ -10,14 +10,20 @@ import android.widget.Toast;
 
 import com.pxy.studyhelper.MyApplication;
 import com.pxy.studyhelper.R;
+import com.pxy.studyhelper.entity.Test;
 import com.pxy.studyhelper.entity.User;
+import com.pxy.studyhelper.utils.Tools;
 
 import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.Event;
 import org.xutils.view.annotation.ViewInject;
 import org.xutils.x;
 
+import java.util.List;
+
+import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.BmobUser;
+import cn.bmob.v3.listener.FindListener;
 import cn.bmob.v3.listener.SaveListener;
 
 import static cn.bmob.v3.BmobUser.getCurrentUser;
@@ -52,11 +58,12 @@ public class LoginActivity extends Activity {
             @Override
             public void onSuccess() {
                 //给当前用户赋值
-                MyApplication.mCurrentUser= getCurrentUser(LoginActivity.this,User.class);
+                MyApplication.mCurrentUser = getCurrentUser(LoginActivity.this, User.class);
                 Toast.makeText(LoginActivity.this, "登录成功...", Toast.LENGTH_SHORT).show();
                 startActivity(new Intent(LoginActivity.this, MainActivity.class));
 //                finish();
             }
+
             @Override
             public void onFailure(int code, String msg) {
                 Toast.makeText(LoginActivity.this, "登录失败..." + code + "---" + msg, Toast.LENGTH_SHORT).show();
@@ -72,12 +79,40 @@ public class LoginActivity extends Activity {
                 break;
             case R.id.tv_forget_pwd:
 //                Toast.makeText(LoginActivity.this, "有待继续开发...", Toast.LENGTH_SHORT).show();
-           LoadingDialog.showLoadingDialog(LoginActivity.this);
+//           LoadingDialog.showLoadingDialog(LoginActivity.this);
+                test();
                 break;
             case R.id.tv_see_first:
                 startActivity(new Intent(LoginActivity.this,MainActivity.class));
                 break;
         }
+    }
+
+
+    public void test(){
+        BmobQuery<Test> bmobQuery=new BmobQuery<>();
+        bmobQuery.findObjects(LoginActivity.this, new FindListener<Test>() {
+            @Override
+            public void onSuccess(List<Test> object) {
+                // TODO Auto-generated method stub
+                Tools.ShowToast(LoginActivity.this, "查询成功：共" + object.size() + "条数据。");
+                for (Test examData : object) {
+                    if (examData.getTestFile() != null) {
+                        //文件名称
+                        examData.getTestFile().getFilename();
+                        //文件下载地址
+                        String url = examData.getTestFile().getFileUrl(LoginActivity.this);
+                        Tools.ShowLog("url", url);
+                    }
+                }
+            }
+
+            @Override
+            public void onError(int code, String msg) {
+                // TODO Auto-generated method stub
+                Tools.ShowToast(LoginActivity.this, msg);
+            }
+        });
     }
 
 }
