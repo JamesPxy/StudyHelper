@@ -101,10 +101,10 @@ public class TestDao {
 	}
 
 	//更新记录
-	public int updateQuestion(int i,String  where,ContentValues  values){
+	public int update(int i,String  where,ContentValues  values){
 		int k=1;//标记执行次数
 		if(i>0){
-			db = SQLiteDatabase.openDatabase(context.getFilesDir().getAbsolutePath()+ dataName,null, SQLiteDatabase.OPEN_READWRITE);
+			db = SQLiteDatabase.openDatabase(context.getFilesDir().getAbsolutePath()+"/"+dataName,null, SQLiteDatabase.OPEN_READWRITE);
 		}
 		String  data= dataName.replace(".db", "");
 		int rows=db.update(data, values,"answerA=?",new String[]{where});
@@ -114,6 +114,18 @@ public class TestDao {
 			db.close();//释放资源
 		}
 		return rows;
+	}
+	//更新错题记录
+	public boolean updateQuestion(String  where,int wrongNum){
+		db = SQLiteDatabase.openDatabase(context.getFilesDir().getAbsolutePath()+"/"+dataName,null, SQLiteDatabase.OPEN_READWRITE);
+		String  data= dataName.replace(".db", "");
+		ContentValues contentValues=new ContentValues();
+		contentValues.put("isWrong", wrongNum);
+		int rows=db.update(data, contentValues,"answerA=?",new String[]{where});
+		db.close();//释放资源
+		LogUtil.i("updete wrong  question  success...");
+		if(rows!=-1) return   true;
+		return false;
 	}
 
 

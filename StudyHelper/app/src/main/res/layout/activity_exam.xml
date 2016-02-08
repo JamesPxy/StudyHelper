@@ -19,6 +19,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Question Desciption"
+                android:background="@color/greenBg"
                 android:textSize="@dimen/quesitionSize" />
 
             <RadioGroup
@@ -31,6 +32,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center_vertical"
+                    android:background="@null"
+                    android:button="@null"
+                    android:drawableLeft="@drawable/radio_btn_selector"
                     android:text="AnswerA"
                     android:textSize="@dimen/answerSize" />
 
@@ -39,6 +43,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center_vertical"
+                    android:background="@null"
+                    android:button="@null"
+                    android:drawableLeft="@drawable/radio_btn_selector"
                     android:text="AnswerB"
                     android:textSize="@dimen/answerSize" />
 
@@ -47,6 +54,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center_vertical"
+                    android:background="@null"
+                    android:button="@null"
+                    android:drawableLeft="@drawable/radio_btn_selector"
                     android:text="AnswerC"
                     android:textSize="@dimen/answerSize" />
 
@@ -55,6 +65,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center_vertical"
+                    android:background="@null"
+                    android:button="@null"
+                    android:drawableLeft="@drawable/radio_btn_selector"
                     android:text="AnswerD"
                     android:textSize="@dimen/answerSize" />
                 <RadioButton
@@ -62,6 +75,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center_vertical"
+                    android:background="@null"
+                    android:button="@null"
+                    android:drawableLeft="@drawable/radio_btn_selector"
                     android:text="AnswerE"
                     android:visibility="gone"
                     android:textSize="@dimen/answerSize" />
@@ -123,7 +139,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="添加笔记"
+                android:text="查看答案"
                 android:textSize="12sp" />
         </LinearLayout>
 

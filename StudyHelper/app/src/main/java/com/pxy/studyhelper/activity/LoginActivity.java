@@ -77,7 +77,8 @@ public class LoginActivity extends Activity {
                 startActivity(new Intent(LoginActivity.this, TestBigActivity.class));
                 break;
             case R.id.tv_see_first:
-                startActivity(new Intent(LoginActivity.this,MainActivity.class));
+                startActivity(new Intent(LoginActivity.this, TestBigActivity.class));
+//                startActivity(new Intent(LoginActivity.this,MainActivity.class));
                 break;
         }
     }

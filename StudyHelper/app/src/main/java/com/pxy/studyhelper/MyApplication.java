@@ -6,6 +6,7 @@ import com.bmob.BmobConfiguration;
 import com.bmob.BmobPro;
 import com.pxy.studyhelper.entity.User;
 
+import org.xutils.DbManager;
 import org.xutils.x;
 
 import cn.bmob.v3.Bmob;
@@ -21,6 +22,10 @@ public class MyApplication  extends Application {
     public static User  mCurrentUser;
 
     public static boolean  isDebug=true;
+
+    public static DbManager  dbManager;
+
+    public static  DbManager.DaoConfig daoConfig;
     @Override
     public void onCreate() {
         super.onCreate();
@@ -44,6 +49,23 @@ public class MyApplication  extends Application {
 //        String formatSize = BmobPro.getInstance(this).getCacheFormatSize();
 ////        清除缓存：
 //        BmobPro.getInstance(this).clearCache();
+
+
+        daoConfig = new DbManager.DaoConfig()
+                .setDbName("FavoriteQuestion")//创建数据库的名称
+                .setDbVersion(1)//数据库版本号
+//                .setDbDir()//设置数据库存储路径  ，如果不设置，那么数据库默认存储在/data/data/你的应用程序/database/xxx.db下。
+                .setDbUpgradeListener(new DbManager.DbUpgradeListener() {
+                    @Override
+                    public void onUpgrade(DbManager db, int oldVersion, int newVersion) {
+                        // TODO: ...
+                        // db.addColumn(...);
+                        // db.dropTable(...);
+                        // ...
+                    }
+                });//数据库更新操作
+
+        dbManager= x.getDb(daoConfig);
 
     }
 }

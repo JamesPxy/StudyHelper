@@ -95,7 +95,6 @@ public class GetExamDataBiz {
             conn.setConnectTimeout(5000);
             conn.setUseCaches(true);
             is=conn.getInputStream();
-
 //            os = new FileOutputStream(DB_PATH + DB_NAME);
             os = new FileOutputStream(file);
             byte[] buffer = new byte[1024];
@@ -123,6 +122,12 @@ public class GetExamDataBiz {
     }
 
 
+    /**
+     * 测试下载类
+     * @param context
+     * @param url
+     * @param dbName
+     */
     public static void test(final Context  context, final String url, final String  dbName){
         RequestParams params = new RequestParams(url);
         File  file=new File(context.getFilesDir(),dbName);

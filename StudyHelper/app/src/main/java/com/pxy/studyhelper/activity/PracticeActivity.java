@@ -8,12 +8,15 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
+import com.pxy.studyhelper.MyApplication;
 import com.pxy.studyhelper.R;
 import com.pxy.studyhelper.dao.TestDao;
+import com.pxy.studyhelper.entity.FavoriteQuestion;
 import com.pxy.studyhelper.entity.Question;
 import com.pxy.studyhelper.utils.Tools;
 
 import org.xutils.common.util.LogUtil;
+import org.xutils.ex.DbException;
 import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.Event;
 import org.xutils.view.annotation.ViewInject;
@@ -88,9 +91,10 @@ public class PracticeActivity extends Activity {
                 if(mAnswerC.isChecked())mCurrentQuestion.setSelectedAnswer(2);
                 if(mAnswerD.isChecked())mCurrentQuestion.setSelectedAnswer(3);
                 if(mAnswerE.isChecked())mCurrentQuestion.setSelectedAnswer(4);
+                //检查答案
+                CheckAnswer();
             }
         });
-
     }
 
     /**
@@ -98,11 +102,12 @@ public class PracticeActivity extends Activity {
      * @param index
      */
     private void showQuestion(int index) {
+        tvExplaination.setVisibility(View.GONE);
         if(index<0){
             Tools.ToastShort("当前是第一题...");
         }else if(index<mTotalQusestion){
             mCurrentQuestion=mQuestionList.get(index);
-            tvQuestion.setText(mCurrentQuestion.getQuestion());
+            tvQuestion.setText(index+1+"."+mCurrentQuestion.getQuestion());
             mAnswerA.setText(mCurrentQuestion.getAnswerA());
             mAnswerB.setText(mCurrentQuestion.getAnswerB());
             mAnswerC.setText(mCurrentQuestion.getAnswerC());
@@ -113,7 +118,19 @@ public class PracticeActivity extends Activity {
             }else{
                 mAnswerE.setVisibility(View.GONE);
             }
-        }else{
+            mRadioGroup.setSelected(false);
+            //todo  选中记忆
+            int select=mCurrentQuestion.getSelectedAnswer();
+
+            switch (select){
+                case 0:mAnswerA.setChecked(true); break;
+                case 1:mAnswerB.setChecked(true); break;
+                case 2:mAnswerC.setChecked(true); break;
+                case 3:mAnswerD.setChecked(true); break;
+                case 4:mAnswerE.setChecked(true); break;
+                default: mRadioGroup.clearCheck();break;
+            }
+        }else {
             Tools.ToastShort("当前是最后一题...");
         }
     }
@@ -125,17 +142,69 @@ public class PracticeActivity extends Activity {
                 showQuestion(--mCurrentIndex);
                 break;
             case R.id.iv_add_note:
+                showRightAnswer();
                 break;
             case R.id.iv_add_collection:
+                //todo 加入收藏
+                FavoriteQuestion  favoriteQuestion=new FavoriteQuestion();
+                favoriteQuestion.setQuestion(mCurrentQuestion.getQuestion());
+                favoriteQuestion.setAnswerA(mCurrentQuestion.getAnswerA());
+                favoriteQuestion.setAnswerA(mCurrentQuestion.getAnswerA());
+                favoriteQuestion.setAnswerA(mCurrentQuestion.getAnswerA());
+                favoriteQuestion.setAnswerA(mCurrentQuestion.getAnswerA());
+                favoriteQuestion.setAnswerA(mCurrentQuestion.getAnswerA());
+                favoriteQuestion.setRightAnswer(mCurrentQuestion.getRightAnswer());
+                favoriteQuestion.setExplaination(mCurrentQuestion.getExplaination());
+                favoriteQuestion.setIsWrong(mCurrentQuestion.isWrong);
+                try {
+                    MyApplication.dbManager.save(favoriteQuestion);
+                } catch (DbException e) {
+                    e.printStackTrace();
+                }
                 break;
             case R.id.iv_nextQ:
                 showQuestion(++mCurrentIndex);
                 break;
         }
 
+    }
+    /**
+     * 显示答案
+     */
+    private void showRightAnswer() {
 
+        tvExplaination.setVisibility(View.VISIBLE);
+        tvExplaination.setText("正确答案:"+mCurrentQuestion.getRightAnswer());
     }
 
+
+    private void CheckAnswer4Exam(){
+        Question  mQuestion;
+        int  score=0;
+        for(int i=0;i<mQuestionList.size();i++){
+            mQuestion=mQuestionList.get(i);
+            if(mQuestion.getSelectedAnswer()==mQuestion.getRightAnswer()){
+                score++;
+            }else{
+                //TODO 答错题目  存入错题库  修改 isWrong  return  boolean
+                mTestDao.updateQuestion(mCurrentQuestion.getAnswerA(),1);
+
+            }
+        }
+    }
+
+    private boolean CheckAnswer(){
+        if(mCurrentQuestion.getRightAnswer()==mCurrentQuestion.getSelectedAnswer())
+        {
+            mTestDao.updateQuestion(mCurrentQuestion.getAnswerA(),0);
+            return  true;
+        }else {//答错
+            mTestDao.updateQuestion(mCurrentQuestion.getAnswerA(),1);
+            //显示正确答案
+            showRightAnswer();
+        }
+        return  false;
+    }
 
 
 }
