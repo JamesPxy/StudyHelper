@@ -1,5 +1,7 @@
 package com.pxy.studyhelper.entity;
 
+import java.io.Serializable;
+
 import cn.bmob.v3.BmobObject;
 import cn.bmob.v3.datatype.BmobFile;
 
@@ -9,12 +11,12 @@ import cn.bmob.v3.datatype.BmobFile;
  * Time: 23:38
  * FIXME
  */
-public class Test extends BmobObject{
+public class Test extends BmobObject  implements Serializable{
 
     private String  name;
     private BmobFile TestFile;
-    private int sort1;
-    private int sort2;
+    private int sorts1;
+    private int sorts2;
 
     public String getName() {
         return name;
@@ -32,20 +34,20 @@ public class Test extends BmobObject{
         TestFile = testFile;
     }
 
-    public int getSort1() {
-        return sort1;
+    public int getSorts1() {
+        return sorts1;
     }
 
-    public void setSort1(int sort1) {
-        this.sort1 = sort1;
+    public void setSorts1(int sort1) {
+        this.sorts1 = sort1;
     }
 
-    public int getSort2() {
-        return sort2;
+    public int getSorts2() {
+        return sorts2;
     }
 
-    public void setSort2(int sort2) {
-        this.sort2 = sort2;
+    public void setSorts2(int sort2) {
+        this.sorts2 = sort2;
     }
 
     @Override
@@ -53,8 +55,8 @@ public class Test extends BmobObject{
         return "Test{" +
                 "name='" + name + '\'' +
                 ", TestFile=" + TestFile +
-                ", sort1=" + sort1 +
-                ", sort2=" + sort2 +
+                ", sorts1=" + sorts1 +
+                ", sorts2=" + sorts2 +
                 '}';
     }
 }

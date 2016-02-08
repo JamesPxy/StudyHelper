@@ -35,7 +35,7 @@ public class LoadingDialog {
         mAlertDialog=builder.create();
         mAlertDialog.show();
     }
-    private   static  void dissmissDialog(){
+    public    static  void dissmissDialog(){
         if(mAlertDialog!=null){
             mAlertDialog.dismiss();
         }

@@ -9,6 +9,8 @@ import android.widget.Toast;
 
 import com.pxy.studyhelper.MyApplication;
 
+import org.xutils.x;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -27,6 +29,10 @@ public class Tools {
     public static void ShowToast(Context context,String msg)
     {
         Toast.makeText(context, msg, Toast.LENGTH_SHORT).show();
+    }
+    public static void ToastShort(String msg)
+    {
+        Toast.makeText(x.app(), msg, Toast.LENGTH_SHORT).show();
     }
 
     //log日志工具类
