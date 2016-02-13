@@ -5,7 +5,6 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.util.Log;
 
 import com.pxy.studyhelper.entity.Question;
 
@@ -44,8 +43,7 @@ public class TestDao {
 		if(cursor.getCount() > 0)
 		{
 			cursor.moveToFirst();
-			int count = cursor.getCount();
-			for(int i = 0; i < count; i++)
+			for(int i = 0; i < cursor.getCount(); i++)
 			{
 				cursor.moveToPosition(i);
 				Question question = new Question();
@@ -58,7 +56,7 @@ public class TestDao {
 				question.rightAnswer = cursor.getInt(cursor.getColumnIndex("answer"));
 				question.isWrong = cursor.getInt(cursor.getColumnIndex("isWrong"));
 				question.explaination = cursor.getString(cursor.getColumnIndex("explaination"));
-				question.selectedAnswer = -1;
+				question.setSelectedAnswer(-1);
 				question.id = cursor.getInt(cursor.getColumnIndex("ID"));
 				list.add(question);
 			}
@@ -71,14 +69,12 @@ public class TestDao {
 		db = SQLiteDatabase.openDatabase(context.getFilesDir().getAbsolutePath()+ dataName,null, SQLiteDatabase.OPEN_READONLY);
 
 		String  data= dataName.replace(".db", "");
-		Cursor cursor=db.rawQuery("select * from  "+data+"  where isWrong!=?",new String[]{"0"});
+		Cursor cursor = db.rawQuery("select * from  " + data + "where isWrong!=?",new String[]{"0"});
 		List<Question> wrongList = new ArrayList<Question>();
 		LogUtil.i("cursor-getWrongQuestions--"+cursor.getCount());
-		if(cursor.getCount() > 0)
-		{
+		if(cursor.getCount() > 0) {
 			cursor.moveToFirst();
-			int count = cursor.getCount();
-			for(int i = 0; i < count; i++)
+			for(int i = 0; i < cursor.getCount(); i++)
 			{
 				cursor.moveToPosition(i);
 				Question question = new Question();
@@ -91,30 +87,16 @@ public class TestDao {
 				question.rightAnswer = cursor.getInt(cursor.getColumnIndex("answer"));
 				question.isWrong = cursor.getInt(cursor.getColumnIndex("isWrong"));
 				question.explaination = cursor.getString(cursor.getColumnIndex("explaination"));
-				question.selectedAnswer = -1;
+				question.setSelectedAnswer(-1);
 				question.id = cursor.getInt(cursor.getColumnIndex("ID"));
 				wrongList.add(question);
 			}
 		}
 		db.close();
+		LogUtil.i("wrong Quesion size--"+wrongList.size());
 		return wrongList;
 	}
 
-	//更新记录
-	public int update(int i,String  where,ContentValues  values){
-		int k=1;//标记执行次数
-		if(i>0){
-			db = SQLiteDatabase.openDatabase(context.getFilesDir().getAbsolutePath()+"/"+dataName,null, SQLiteDatabase.OPEN_READWRITE);
-		}
-		String  data= dataName.replace(".db", "");
-		int rows=db.update(data, values,"answerA=?",new String[]{where});
-		k++;
-		Log.i("tag", "update--wrong--success"+rows+"-k--"+k);
-		if(k==i){
-			db.close();//释放资源
-		}
-		return rows;
-	}
 	//更新错题记录
 	public boolean updateQuestion(String  where,int wrongNum){
 		db = SQLiteDatabase.openDatabase(context.getFilesDir().getAbsolutePath()+"/"+dataName,null, SQLiteDatabase.OPEN_READWRITE);
@@ -123,10 +105,23 @@ public class TestDao {
 		contentValues.put("isWrong", wrongNum);
 		int rows=db.update(data, contentValues,"answerA=?",new String[]{where});
 		db.close();//释放资源
-		LogUtil.i("updete wrong  question  success...");
+		LogUtil.i("update wrong  question  success...");
 		if(rows!=-1) return   true;
 		return false;
 	}
+//	//更新错题记录
+//	public boolean getIsFavorite(String  where){
+//		db = SQLiteDatabase.openDatabase(context.getFilesDir().getAbsolutePath()+"/"+dataName,null, SQLiteDatabase.OPEN_READWRITE);
+//		String  data= dataName.replace(".db", "");
+//		ContentValues contentValues=new ContentValues();
+//		contentValues.put("isWrong", wrongNum);
+//		int rows=db.update(data, contentValues,"answerA=?",new String[]{where});
+//		db.rawQuery()
+//		db.close();//释放资源
+//		LogUtil.i("update wrong  question  success...");
+//		if(rows!=-1) return   true;
+//		return false;
+//	}
 
 
 }

@@ -9,7 +9,7 @@ public class Question {
 	public String answerD;
 	public String answerE;
 	public int rightAnswer;
-	public int selectedAnswer;
+	public int selectedAnswer=-1;
 	public String explaination;
 	public int  isWrong;
 	public int  isFavorite;

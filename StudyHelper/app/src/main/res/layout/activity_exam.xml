@@ -24,6 +24,8 @@
 
             <RadioGroup
                 android:id="@+id/radioGroup"
+                android:layout_marginTop="10dp"
+                android:background="@null"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" >
 
@@ -33,8 +35,6 @@
                     android:layout_height="wrap_content"
                     android:gravity="center_vertical"
                     android:background="@null"
-                    android:button="@null"
-                    android:drawableLeft="@drawable/radio_btn_selector"
                     android:text="AnswerA"
                     android:textSize="@dimen/answerSize" />
 
@@ -43,10 +43,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center_vertical"
-                    android:background="@null"
-                    android:button="@null"
-                    android:drawableLeft="@drawable/radio_btn_selector"
                     android:text="AnswerB"
+                    android:background="@null"
                     android:textSize="@dimen/answerSize" />
 
                 <RadioButton
@@ -55,8 +53,6 @@
                     android:layout_height="wrap_content"
                     android:gravity="center_vertical"
                     android:background="@null"
-                    android:button="@null"
-                    android:drawableLeft="@drawable/radio_btn_selector"
                     android:text="AnswerC"
                     android:textSize="@dimen/answerSize" />
 
@@ -65,31 +61,29 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center_vertical"
-                    android:background="@null"
-                    android:button="@null"
-                    android:drawableLeft="@drawable/radio_btn_selector"
                     android:text="AnswerD"
+                    android:background="@null"
                     android:textSize="@dimen/answerSize" />
                 <RadioButton
                     android:id="@+id/answerE"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center_vertical"
-                    android:background="@null"
-                    android:button="@null"
-                    android:drawableLeft="@drawable/radio_btn_selector"
                     android:text="AnswerE"
+                    android:background="@null"
                     android:visibility="gone"
                     android:textSize="@dimen/answerSize" />
             </RadioGroup>
 
             <TextView
+                android:visibility="gone"
                 android:id="@+id/explaination"
+                android:layout_marginTop="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Question Explaination"
                 android:textSize="@dimen/answerSize"
-                android:visibility="gone" />
+                 />
         </LinearLayout>
     </ScrollView>
 

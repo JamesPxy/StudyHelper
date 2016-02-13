@@ -1,11 +1,11 @@
 package com.pxy.studyhelper.biz;
 
 import android.content.Context;
-import android.util.Log;
+import android.content.Intent;
 
 import com.pxy.studyhelper.activity.TestListActivity;
 import com.pxy.studyhelper.entity.Test;
-import com.pxy.studyhelper.utils.DialogUtil;
+import com.pxy.studyhelper.utils.Constant;
 import com.pxy.studyhelper.utils.IsDownload;
 import com.pxy.studyhelper.utils.LoadingDialog;
 import com.pxy.studyhelper.utils.Tools;
@@ -16,13 +16,11 @@ import org.xutils.http.RequestParams;
 import org.xutils.x;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.List;
 
@@ -73,9 +71,11 @@ public class GetExamDataBiz {
      * @param dbName
      * @throws IOException
      */
-    public static void download(Context context,String uri,String dbName) throws IOException {
+    public static void download(Context context,Test test) throws IOException {
 //        File DB_PATH = context.getFilesDir();
 //        String DB_NAME = dbName;
+        String uri=test.getTestFile().getFileUrl(context);
+        String dbName=test.getTestFile().getFilename();
         File  file=new File(context.getFilesDir(),dbName);
         if(!file.exists()){
             try {
@@ -83,8 +83,6 @@ public class GetExamDataBiz {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-        }else{
-            return;
         }
         InputStream is=null;
         OutputStream os=null;
@@ -105,19 +103,22 @@ public class GetExamDataBiz {
                 LogUtil.i("download  ing...");
                 os.flush();
             }
-            LogUtil.i("download  success  666");
             //保存对应url下载成功
-            IsDownload.saveDownloadStatus(context,uri);
-        } catch (MalformedURLException e) {
+            IsDownload.saveDownloadStatus(context, uri, true);
+            LogUtil.i("download  test  success  666");
+        } catch (Exception e) {
             LogUtil.e(e.getMessage());
-        } catch (IOException e) {
-            LogUtil.e(e.getMessage());
+            IsDownload.saveDownloadStatus(context, uri,false);
         }finally {
             if (os != null) {
                 os.close();
             }
             is.close();
-
+            Intent  intent=new Intent();
+            intent.setAction(Constant.RECEIVER_DOWNLOAD);
+            intent.putExtra("uri",uri);
+            intent.putExtra("test",test);
+            context.sendBroadcast(intent);
         }
     }
 
@@ -156,7 +157,7 @@ public class GetExamDataBiz {
                     e.printStackTrace();
                 }
                 //保存对应url下载成功
-                IsDownload.saveDownloadStatus(context,url);
+                IsDownload.saveDownloadStatus(context,url,true);
             }
             @Override
             public void onCancelled(CancelledException arg0) {
@@ -165,7 +166,7 @@ public class GetExamDataBiz {
 
             @Override
             public void onError(Throwable arg0, boolean arg1) {
-              LogUtil.e("error---"+arg0.getMessage());
+                LogUtil.e("error---"+arg0.getMessage());
             }
 
             @Override

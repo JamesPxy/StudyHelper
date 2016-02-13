@@ -8,6 +8,8 @@ package com.pxy.studyhelper.utils;
  */
 public class Constant {
 
+    public static final String RECEIVER_DOWNLOAD="com.pxy.download";
+
     public static final String[]  TEST_BIG_SORT={"中医基础理论","中医诊断学","中药学","方剂学","中医内科学","针灸学"};
 
     public static final String[][]  TEST_SORTS={{"中医理论体系的主要特点","阴阳五行学说","五脏六腑","精气、血、津液、神","经络体质","病因和发病","病机","防治和养生"}

@@ -7,11 +7,11 @@ import android.content.SharedPreferences.Editor;
 
 public class IsDownload {
 	@SuppressLint({ "NewApi", "CommitPrefEdits" })
-	public static void saveDownloadStatus(Context context, String position){
+	public static void saveDownloadStatus(Context context, String position,boolean isDown){
 		//从偏好设置中读取当前试卷是否已经下载
 		SharedPreferences pref=context.getSharedPreferences("download", Context.MODE_WORLD_WRITEABLE);
 		Editor editor=pref.edit();
-		editor.putBoolean(position,true);
+		editor.putBoolean(position,isDown);
 		editor.commit();
 	}
 

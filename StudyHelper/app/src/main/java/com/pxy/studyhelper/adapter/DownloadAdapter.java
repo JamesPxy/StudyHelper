@@ -1,6 +1,8 @@
 package com.pxy.studyhelper.adapter;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.view.LayoutInflater;
@@ -16,6 +18,7 @@ import com.pxy.studyhelper.R;
 import com.pxy.studyhelper.activity.PracticeActivity;
 import com.pxy.studyhelper.biz.GetExamDataBiz;
 import com.pxy.studyhelper.entity.Test;
+import com.pxy.studyhelper.utils.DialogUtil;
 import com.pxy.studyhelper.utils.IsDownload;
 import com.pxy.studyhelper.utils.Tools;
 
@@ -84,10 +87,23 @@ public class DownloadAdapter  extends BaseAdapter {
         holder.mRelativeLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //// TODO: 2016/2/5  弹出对话框选择进入测试模式 或者练习模式
-                Intent intent=new Intent(context, PracticeActivity.class);
-                intent.putExtra("dbName",data.getTestFile().getFilename());
-                context.startActivity(intent);
+                //// TODO: 2016/2/5  弹出对话框选择进入测试模式 或者练习模式 以及错题模式
+                AlertDialog.Builder  builder=new AlertDialog.Builder(context);
+                builder.setIcon(R.drawable.ic_luncher);
+                builder.setTitle("选择做题模式:");
+                builder.setItems(new String[]{"练习模式", "测试模式", "错题模式"}, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Intent intent = new Intent(context, PracticeActivity.class);
+                        //试题类别
+                        intent.putExtra("dbName", data.getTestFile().getFilename());
+                        //做题模式
+                        intent.putExtra("mode",which);
+                        context.startActivity(intent);
+                    }
+                });
+                builder.show();
+
             }
         });
         //下载按钮
@@ -95,24 +111,23 @@ public class DownloadAdapter  extends BaseAdapter {
             @Override
             public void onClick(View v) {
                 //todo  下载判断和下载
-                LogUtil.e(data.getTestFile().getFileUrl(context));
-
+                LogUtil.i(data.getTestFile().getFileUrl(context));
                 if(IsDownload.isDownload(context,data.getTestFile().getFileUrl(context))) {
                     Tools.ToastShort("该试题已下载...");
                 }else{//没有下载  进行下载
+                    DialogUtil.showProgressDialog(context,"正在下载中...");
                     new  Thread(new Runnable() {
                         @Override
                         public void run() {
                             try {
-                                GetExamDataBiz.download(context, data.getTestFile().getFileUrl(context), data.getTestFile().getFilename());
-//                                GetExamDataBiz.test(context,data.getTestFile().getFileUrl(context),data.getTestFile().getFilename());
+                                GetExamDataBiz.download(context, data);
                                 LogUtil.e(data.getTestFile().getFilename());
                             } catch (Exception e) {
                                 LogUtil.e(e.getMessage());
+                                return;
                             }
                         }
                     }).start();
-                    Tools.ToastShort("下载成功...");
                 }
             }
         });
