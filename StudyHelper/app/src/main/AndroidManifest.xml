@@ -41,14 +41,25 @@
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
         <activity android:name=".activity.TestBigActivity"
-                 >
+                  android:theme="@style/AppTheme.NoActionBar">
         </activity>
-        <activity android:name=".activity.TestActivity">
+
+        <activity android:name=".activity.TestSmallActivity"
+                  android:theme="@style/AppTheme.NoActionBar">
         </activity>
-        <activity android:name=".activity.PracticeActivity">
+
+        <activity android:name=".activity.TestListActivity"
+                  android:theme="@style/AppTheme.NoActionBar">
         </activity>
-        <activity android:name=".activity.TestListActivity">
+
+        <activity android:name=".activity.PracticeActivity"
+                  android:theme="@style/AppTheme.NoActionBar">
         </activity>
+
+        <activity android:name=".activity.ExamActivity"
+                  android:theme="@style/AppTheme.NoActionBar">
+        </activity>
+
     </application>
 
 </manifest>

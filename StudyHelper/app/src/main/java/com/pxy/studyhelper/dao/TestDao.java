@@ -66,10 +66,10 @@ public class TestDao {
 	}
 	public List<Question> getWrongQuestion()
 	{
-		db = SQLiteDatabase.openDatabase(context.getFilesDir().getAbsolutePath()+ dataName,null, SQLiteDatabase.OPEN_READONLY);
+		db = SQLiteDatabase.openDatabase(context.getFilesDir().getAbsolutePath()+"/"+dataName,null, SQLiteDatabase.OPEN_READONLY);
 
 		String  data= dataName.replace(".db", "");
-		Cursor cursor = db.rawQuery("select * from  " + data + "where isWrong!=?",new String[]{"0"});
+		Cursor cursor = db.rawQuery("select * from  " + data + "  where isWrong=?",new String[]{"1"});
 		List<Question> wrongList = new ArrayList<Question>();
 		LogUtil.i("cursor-getWrongQuestions--"+cursor.getCount());
 		if(cursor.getCount() > 0) {

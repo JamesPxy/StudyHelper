@@ -6,12 +6,15 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.pxy.studyhelper.R;
 import com.pxy.studyhelper.utils.Constant;
 
-public class TestActivity extends AppCompatActivity {
+public class TestSmallActivity extends AppCompatActivity {
 
     private ListView  mListView;
     private ArrayAdapter<String>  adapter;
@@ -22,21 +25,35 @@ public class TestActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_test);
+        setContentView(R.layout.test_list_layout);
         position1=getIntent().getIntExtra("position1",0);
-        mListView= (ListView) findViewById(R.id.listView_test);
+        initView();
+
         data= Constant.TEST_SORTS[position1];
 
-        adapter=new ArrayAdapter<>(this,android.R.layout.simple_list_item_1,data);
+        adapter=new ArrayAdapter<>(this,R.layout.item_test_list, R.id.tv_testName,data);
         mListView.setAdapter(adapter);
-
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent=new Intent(TestActivity.this,TestListActivity.class);
+                Intent intent=new Intent(TestSmallActivity.this,TestListActivity.class);
                 intent.putExtra("position1",position1);
                 intent.putExtra("position2",position);
                 startActivity(intent);
+            }
+        });
+    }
+
+    private void initView() {
+        mListView= (ListView) findViewById(R.id.listView);
+        RelativeLayout rv= (RelativeLayout) findViewById(R.id.include_tabbar);
+        ImageView iv_back= (ImageView) rv.findViewById(R.id.iv_back);
+        TextView title=(TextView)rv.findViewById(R.id.tv_title);
+        title.setText("章节列表");
+        iv_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
             }
         });
     }

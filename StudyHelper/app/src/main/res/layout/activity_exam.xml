@@ -1,91 +1,140 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@drawable/w05"
-                android:padding="@dimen/activity_horizontal_margin">
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/w05"
+    >
+
+    <RelativeLayout
+        android:id="@+id/rv_tab"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/greenBg"
+        >
+
+        <ImageView
+            android:id="@+id/iv_back"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/sso_icon_back" />
+        <ImageView
+            android:id="@+id/iv_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_centerInParent="true"
+            android:layout_toLeftOf="@+id/chronometer"
+            android:src="@android:drawable/ic_media_pause"/>
+        <Chronometer
+            android:id ="@+id/chronometer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:format="%s"
+            android:textSize="30sp"
+            android:textColor="@color/whiteBg"
+            />
+        <ImageView
+            android:id="@+id/iv_menu"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dp"
+            android:src="@drawable/ic_luncher"
+            />
+    </RelativeLayout>
+
 
     <ScrollView
-        android:layout_above="@+id/linearLayout1"
-        android:id="@+id/scrollView"
+    android:id="@+id/scrollView"
+    android:layout_above="@+id/linearLayout1"
+    android:layout_below="@+id/rv_tab"
+    android:layout_marginTop="10dp"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        >
-        <LinearLayout
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+        <TextView
+            android:id="@+id/question"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical" >
-            <TextView
-                android:id="@+id/question"
+            android:text="Question Desciption"
+            android:background="@color/greenBg"
+            android:textSize="@dimen/quesitionSize" />
+
+        <RadioGroup
+            android:id="@+id/radioGroup"
+            android:layout_marginTop="10dp"
+            android:background="@null"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+            <RadioButton
+                android:id="@+id/answerA"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Question Desciption"
-                android:background="@color/greenBg"
-                android:textSize="@dimen/quesitionSize" />
-
-            <RadioGroup
-                android:id="@+id/radioGroup"
-                android:layout_marginTop="10dp"
+                android:gravity="center_vertical"
                 android:background="@null"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" >
+                android:text="AnswerA"
+                android:textSize="@dimen/answerSize" />
 
-                <RadioButton
-                    android:id="@+id/answerA"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_vertical"
-                    android:background="@null"
-                    android:text="AnswerA"
-                    android:textSize="@dimen/answerSize" />
-
-                <RadioButton
-                    android:id="@+id/answerB"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_vertical"
-                    android:text="AnswerB"
-                    android:background="@null"
-                    android:textSize="@dimen/answerSize" />
-
-                <RadioButton
-                    android:id="@+id/answerC"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_vertical"
-                    android:background="@null"
-                    android:text="AnswerC"
-                    android:textSize="@dimen/answerSize" />
-
-                <RadioButton
-                    android:id="@+id/answerD"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_vertical"
-                    android:text="AnswerD"
-                    android:background="@null"
-                    android:textSize="@dimen/answerSize" />
-                <RadioButton
-                    android:id="@+id/answerE"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_vertical"
-                    android:text="AnswerE"
-                    android:background="@null"
-                    android:visibility="gone"
-                    android:textSize="@dimen/answerSize" />
-            </RadioGroup>
-
-            <TextView
-                android:visibility="gone"
-                android:id="@+id/explaination"
-                android:layout_marginTop="10dp"
+            <RadioButton
+                android:id="@+id/answerB"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Question Explaination"
-                android:textSize="@dimen/answerSize"
-                 />
-        </LinearLayout>
-    </ScrollView>
+                android:gravity="center_vertical"
+                android:text="AnswerB"
+                android:background="@null"
+                android:textSize="@dimen/answerSize" />
+
+            <RadioButton
+                android:id="@+id/answerC"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:background="@null"
+                android:text="AnswerC"
+                android:textSize="@dimen/answerSize" />
+
+            <RadioButton
+                android:id="@+id/answerD"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:text="AnswerD"
+                android:background="@null"
+                android:textSize="@dimen/answerSize" />
+            <RadioButton
+                android:id="@+id/answerE"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:text="AnswerE"
+                android:background="@null"
+                android:visibility="gone"
+                android:textSize="@dimen/answerSize" />
+        </RadioGroup>
+
+        <TextView
+            android:visibility="gone"
+            android:id="@+id/explaination"
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Question Explaination"
+            android:textSize="@dimen/answerSize"
+            />
+    </LinearLayout>
+</ScrollView>
 
     <LinearLayout
         android:id="@+id/linearLayout1"
@@ -133,7 +182,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="查看答案"
+                android:text="添加笔记"
                 android:textSize="12sp" />
         </LinearLayout>
 

@@ -1,9 +1,13 @@
 package com.pxy.studyhelper.activity;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RadioButton;
@@ -29,8 +33,8 @@ import java.util.List;
 /**
  * 试题练习Activity
  */
-@ContentView(value = R.layout.activity_exam)
-public class PracticeActivity extends Activity {
+@ContentView(value = R.layout.activity_practice)
+public class PracticeActivity extends AppCompatActivity {
     @ViewInject(value = R.id.question)
     private TextView   tvQuestion;
     @ViewInject(value = R.id.radioGroup)
@@ -71,8 +75,11 @@ public class PracticeActivity extends Activity {
         super.onCreate(savedInstanceState);
         x.view().inject(this);
 
+        setToolbar();
+
         int  mode=getIntent().getIntExtra("mode", 0);
-        if(mode==3)isWrongMode=true;
+        LogUtil.i("mode--"+mode);
+        if(mode==2)isWrongMode=true;
         String name=getIntent().getStringExtra("dbName");
         LogUtil.i("dbName--"+name);
         mTestDao=new TestDao(this,name);
@@ -123,6 +130,34 @@ public class PracticeActivity extends Activity {
         });
     }
 
+    private void setToolbar() {
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar.setTitle("试题练习");
+        setSupportActionBar(toolbar);
+//        toolbar.setLogo(R.drawable.ic_luncher);
+        toolbar.setNavigationIcon(R.drawable.icon_back);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+        toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+
+                return false;
+            }
+        });
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater  inflater=new MenuInflater(this);
+        inflater.inflate(R.menu.activity_practice_menu,menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
     /**
      * 显示问题
      * @param index
@@ -160,23 +195,23 @@ public class PracticeActivity extends Activity {
             }else {
                 ivAddCollection.setImageResource(R.drawable.icon_favor1);
             }
-    }else {
-        mCurrentIndex=mTotalQusestion-1;
-        new AlertDialog.Builder(PracticeActivity.this)
-                .setIcon(R.drawable.ic_luncher)
-                .setMessage("已经是最后一题,是否退出")
-                .setTitle("提示")
-                .setCancelable(false)
-                .setNegativeButton("取消", null)
-                .setPositiveButton("退出", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        PracticeActivity.this.finish();
-                    }
-                })
-                .show();
+        }else {
+            mCurrentIndex=mTotalQusestion-1;
+            new AlertDialog.Builder(PracticeActivity.this)
+                    .setIcon(R.drawable.ic_luncher)
+                    .setMessage("已经是最后一题,是否退出")
+                    .setTitle("提示")
+                    .setCancelable(false)
+                    .setNegativeButton("取消", null)
+                    .setPositiveButton("退出", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            PracticeActivity.this.finish();
+                        }
+                    })
+                    .show();
+        }
     }
-}
     @Event(value ={R.id.iv_preQ,R.id.iv_add_note,R.id.iv_add_collection,R.id.iv_nextQ},
             type = View.OnClickListener.class)
     private  void  doClick(View view){

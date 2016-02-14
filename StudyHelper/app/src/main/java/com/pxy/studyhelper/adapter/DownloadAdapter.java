@@ -15,6 +15,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.pxy.studyhelper.R;
+import com.pxy.studyhelper.activity.ExamActivity;
 import com.pxy.studyhelper.activity.PracticeActivity;
 import com.pxy.studyhelper.biz.GetExamDataBiz;
 import com.pxy.studyhelper.entity.Test;
@@ -87,19 +88,31 @@ public class DownloadAdapter  extends BaseAdapter {
         holder.mRelativeLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //// TODO: 2016/2/5  弹出对话框选择进入测试模式 或者练习模式 以及错题模式
+                // 2016/2/5  弹出对话框选择进入测试模式 或者练习模式 以及错题模式
                 AlertDialog.Builder  builder=new AlertDialog.Builder(context);
                 builder.setIcon(R.drawable.ic_luncher);
-                builder.setTitle("选择做题模式:");
+                builder.setTitle("选择模式:");
                 builder.setItems(new String[]{"练习模式", "测试模式", "错题模式"}, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        Intent intent = new Intent(context, PracticeActivity.class);
-                        //试题类别
-                        intent.putExtra("dbName", data.getTestFile().getFilename());
-                        //做题模式
-                        intent.putExtra("mode",which);
-                        context.startActivity(intent);
+                        switch (which){
+                            case 0:case 2:{
+                                Intent intent = new Intent(context, PracticeActivity.class);
+                                //试题类别
+                                intent.putExtra("dbName", data.getTestFile().getFilename());
+                                //做题模式
+                                intent.putExtra("mode",which);
+                                context.startActivity(intent);
+                            }
+                            break;
+                            case 1:{
+                                Intent intent = new Intent(context, ExamActivity.class);
+                                //试题类别
+                                intent.putExtra("dbName", data.getTestFile().getFilename());
+                                context.startActivity(intent);
+                            }
+
+                        }
                     }
                 });
                 builder.show();

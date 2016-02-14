@@ -1,6 +1,5 @@
 package com.pxy.studyhelper.activity;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -8,7 +7,12 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.pxy.studyhelper.R;
 import com.pxy.studyhelper.adapter.DownloadAdapter;
@@ -22,7 +26,7 @@ import com.pxy.studyhelper.utils.Tools;
 
 import java.util.List;
 
-public class TestListActivity extends Activity {
+public class TestListActivity extends AppCompatActivity {
 
     private ListView  mListView;
     private DownloadAdapter mDownloadAdapter;
@@ -34,8 +38,8 @@ public class TestListActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_test_list);
-        mListView= (ListView) findViewById(R.id.listView_test_list);
+        setContentView(R.layout.test_list_layout);
+        initView();
         sort1=getIntent().getIntExtra("position1",0);
         sort2=getIntent().getIntExtra("position2",0);
         LoadingDialog.showLoadingDialog(this);
@@ -45,6 +49,20 @@ public class TestListActivity extends Activity {
         IntentFilter filter=new IntentFilter(Constant.RECEIVER_DOWNLOAD);
         registerReceiver(myReceiver, filter);
 
+    }
+
+    private void initView() {
+        mListView= (ListView) findViewById(R.id.listView);
+        RelativeLayout rv= (RelativeLayout) findViewById(R.id.include_tabbar);
+        ImageView iv_back= (ImageView) rv.findViewById(R.id.iv_back);
+        TextView title=(TextView)rv.findViewById(R.id.tv_title);
+        title.setText("试题列表");
+        iv_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
     }
 
     public void setListView(List<Test>  mTestArrayList) {
@@ -69,16 +87,28 @@ public class TestListActivity extends Activity {
                 if(data==null)return;
                 AlertDialog.Builder  builder=new AlertDialog.Builder(context);
                 builder.setIcon(R.drawable.ic_luncher);
-                builder.setTitle("选择做题模式:");
+                builder.setTitle("选择模式:");
                 builder.setItems(new String[]{"练习模式", "测试模式", "错题模式"}, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        Intent intent = new Intent(TestListActivity.this, PracticeActivity.class);
-                        //试题类别
-                        intent.putExtra("dbName", data.getTestFile().getFilename());
-                        //做题模式
-                        intent.putExtra("mode",which);
-                        context.startActivity(intent);
+                       switch (which){
+                           case 0:case 2:{
+                               Intent intent = new Intent(TestListActivity.this, PracticeActivity.class);
+                               //试题类别
+                               intent.putExtra("dbName", data.getTestFile().getFilename());
+                               //做题模式
+                               intent.putExtra("mode",which);
+                               context.startActivity(intent);
+                           }
+                           break;
+                           case 1:{
+                               Intent intent = new Intent(TestListActivity.this, ExamActivity.class);
+                               //试题类别
+                               intent.putExtra("dbName", data.getTestFile().getFilename());
+                               context.startActivity(intent);
+                           }
+
+                       }
                     }
                 });
                 builder.show();
