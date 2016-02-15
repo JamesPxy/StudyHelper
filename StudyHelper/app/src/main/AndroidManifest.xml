@@ -61,11 +61,6 @@
             android:name=".activity.ExamActivity"
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
-        <activity
-            android:name=".activity.ExamActivity2"
-            android:label="@string/title_activity_exam2"
-            android:theme="@style/AppTheme.NoActionBar">
-        </activity>
     </application>
 
 </manifest>
