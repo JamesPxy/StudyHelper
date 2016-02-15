@@ -30,6 +30,8 @@
     <string name="firstSee">精彩内容，先睹为快>></string>
     <string name="loginBtn">登录</string>
     <string name="title_activity_mylogin">Mylogin</string>
+    <string name="title_activity_exam2">模拟考试</string>
+    <string name="section_format">Hello World from section: %1$d</string>
 
 
 </resources>
