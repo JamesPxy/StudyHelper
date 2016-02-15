@@ -16,8 +16,6 @@ public class LoadingDialog {
 
     public static void showLoadingDialog(Context context){
         AlertDialog.Builder  builder=new AlertDialog.Builder(context);
-//        View view=LayoutInflater.from(context).inflate(R.layout.loading_dialog_layout, null);
-//        ImageView  imageView= (ImageView) view.findViewById(R.id.img_load);
         ImageView  mImageView=new ImageView(context);
 //        builder.setTitle("login")
 //                .setView(view)

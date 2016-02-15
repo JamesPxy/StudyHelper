@@ -91,19 +91,32 @@ public class ExamActivity extends AppCompatActivity {
             this.finish();
             return;
         }
+        initView();
+    }
+
+    private void initView() {
+
+        new AlertDialog.Builder(this).setTitle("提示")
+                .setMessage("考试开始,考试时间为"+mTime+"分钟,加油!")
+                .setIcon(R.drawable.ic_luncher)
+                .setPositiveButton("确定",null)
+                .show();
 
         chronometer.start();
         mTime=mTotalQusestion+":00";
         LogUtil.e(mTime);
-
         chronometer.setOnChronometerTickListener(new Chronometer.OnChronometerTickListener() {
             @Override
             public void onChronometerTick(Chronometer chronometer) {
 //                重置时间  chronometer.setBase(SystemClock.elapsedRealtime());
-               if(mTime.equals(chronometer.getText())){
-                   Tools.ToastShort("测试时间到....");
-                   DialogUtil.showProgressDialog(ExamActivity.this,"测试时间到");
-               }
+                if(mTime.equals(chronometer.getText())){
+                    new AlertDialog.Builder(ExamActivity.this).setIcon(R.drawable.ic_luncher)
+                            .setTitle("提示")
+                            .setMessage("交卷时间到了,还没做完吗?下次要抓紧时间了,加油!")
+                            .setNegativeButton("取消",null)
+                            .setPositiveButton("确定",null)
+                            .show();
+                }
             }
         });
 
@@ -130,20 +143,9 @@ public class ExamActivity extends AppCompatActivity {
                 }
                 //标记选中答案
                 mCurrentQuestion.setSelectedAnswer(checked);
-                if (mCurrentQuestion.getSelectedAnswer() != -1) {
-                    //检查答案
-                    if (!CheckAnswer()) {//答错  显示正确答案
-                        showRightAnswer();
-                    } else {
-                        Tools.ToastShort("回答正确..");
-                    }
-                } else {
-                    tvExplaination.setVisibility(View.GONE);
-                }
             }
         });
     }
-
 
     /**
      * 显示问题
@@ -167,7 +169,6 @@ public class ExamActivity extends AppCompatActivity {
             }else{
                 mAnswerE.setVisibility(View.GONE);
             }
-//            mRadioGroup.setSelected(false);
             //  记住用户选中答案 并显示
             switch (mCurrentQuestion.getSelectedAnswer()){
                 case 0:mAnswerA.setChecked(true);break;
@@ -186,14 +187,15 @@ public class ExamActivity extends AppCompatActivity {
             mCurrentIndex=mTotalQusestion-1;
             new AlertDialog.Builder(ExamActivity.this)
                     .setIcon(R.drawable.ic_luncher)
-                    .setMessage("已经是最后一题,是否退出")
+                    .setMessage("已经是最后一题,是否交卷")
                     .setTitle("提示")
                     .setCancelable(false)
                     .setNegativeButton("取消", null)
-                    .setPositiveButton("退出", new DialogInterface.OnClickListener() {
+                    .setPositiveButton("确定", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                            ExamActivity.this.finish();
+                            //todo  交卷操作
+                            DialogUtil.showResultDialog(ExamActivity.this, getScore());
                         }
                     })
                     .show();
@@ -207,7 +209,8 @@ public class ExamActivity extends AppCompatActivity {
                 showQuestion(--mCurrentIndex);
                 break;
             case R.id.iv_add_note:
-                showRightAnswer();
+                //交卷操作
+                DialogUtil.showResultDialog(ExamActivity.this, getScore());
                 break;
             case R.id.iv_add_collection:
                 //todo 加入收藏
@@ -291,32 +294,19 @@ public class ExamActivity extends AppCompatActivity {
         return false;
     }
 
-    /**
-     * 显示答案
-     */
-    private void showRightAnswer() {
-        tvExplaination.setVisibility(View.VISIBLE);
-        if(mCurrentQuestion==null) return;
-        String str=null;
-        switch (mCurrentQuestion.getRightAnswer()){
-            case 0:str="A";break;
-            case 1:str="B";break;
-            case 2:str="C";break;
-            case 3:str="D";break;
-            case 4:str="E";break;
+    private int getScore(){
+        int  right=0,score;
+        for(int i=0;i<mTotalQusestion;i++) {
+            mCurrentQuestion=mQuestionList.get(i);
+            if (mCurrentQuestion.getRightAnswer() == mCurrentQuestion.getSelectedAnswer()) {
+                mTestDao.updateQuestion(mCurrentQuestion.getAnswerA(), 0);
+                right++;
+            } else {//答错
+                mTestDao.updateQuestion(mCurrentQuestion.getAnswerA(), 1);
+            }
         }
-        tvExplaination.setText("正确答案: "+str+"\n"+"解析: "+mCurrentQuestion.getExplaination());
-    }
-
-
-    private boolean CheckAnswer(){
-        if(mCurrentQuestion.getRightAnswer()==mCurrentQuestion.getSelectedAnswer())
-        {
-            mTestDao.updateQuestion(mCurrentQuestion.getAnswerA(),0);
-            return  true;
-        }else {//答错
-            mTestDao.updateQuestion(mCurrentQuestion.getAnswerA(),1);
-        }
-        return  false;
+        score=(int)((right*1.0/mTotalQusestion)*100);
+        LogUtil.e("getscore----------"+score);
+        return  score;
     }
 }
