@@ -110,8 +110,8 @@ public class ExamActivity2 extends AppCompatActivity {
             list.add(view);
         }
 
-        mViewPager.setAdapter();
-        mViewPager.
+//        mViewPager.setAdapter();
+//        mViewPager.
 
 
         chronometer.start();
@@ -124,7 +124,7 @@ public class ExamActivity2 extends AppCompatActivity {
 //                重置时间  chronometer.setBase(SystemClock.elapsedRealtime());
                 if(mTime.equals(chronometer.getText())){
                     Tools.ToastShort("测试时间到....");
-                    DialogUtil.showProgressDialog(ExamActivity.this, "测试时间到");
+                    DialogUtil.showProgressDialog(ExamActivity2.this, "测试时间到");
                 }
             }
         });
@@ -206,7 +206,7 @@ public class ExamActivity2 extends AppCompatActivity {
             }
         }else {
             mCurrentIndex=mTotalQusestion-1;
-            new AlertDialog.Builder(ExamActivity.this)
+            new AlertDialog.Builder(ExamActivity2.this)
                     .setIcon(R.drawable.ic_luncher)
                     .setMessage("已经是最后一题,是否退出")
                     .setTitle("提示")
@@ -215,7 +215,7 @@ public class ExamActivity2 extends AppCompatActivity {
                     .setPositiveButton("退出", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                            ExamActivity.this.finish();
+                            ExamActivity2.this.finish();
                         }
                     })
                     .show();

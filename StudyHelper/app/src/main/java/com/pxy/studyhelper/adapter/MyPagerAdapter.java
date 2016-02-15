@@ -2,11 +2,9 @@ package com.pxy.studyhelper.adapter;
 
 import android.content.Context;
 import android.support.v4.view.PagerAdapter;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.pxy.studyhelper.R;
 import com.pxy.studyhelper.entity.Question;
 
 import java.util.ArrayList;
@@ -48,9 +46,9 @@ private List<Question>  mQuestionList;
 
     @Override
     public Object instantiateItem(ViewGroup container, int position) {
-        LayoutInflater  inflater=LayoutInflater.from(context);
-        View view=inflater.inflate(R.layout.item_exam,null);
-        view.findViewById(R.id.l);
+//        LayoutInflater  inflater=LayoutInflater.from(context);
+//        View view=inflater.inflate(R.layout.item_exam,null);
+//        view.findViewById(R.id.l);
         return super.instantiateItem(container, position);
     }
 }
