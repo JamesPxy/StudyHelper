@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:id="@+id/lv_topic"
     >
     <RelativeLayout
         android:id="@+id/rv_user_info"
@@ -29,7 +30,7 @@
             android:id="@+id/tv_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="time:2015-10-22"
+            android:text=""
             android:layout_toRightOf="@+id/iv_user_icon"
             android:layout_below="@+id/tv_username"
             android:layout_marginLeft="10dp"
@@ -47,6 +48,7 @@
 
 
     <ImageView
+        android:id="@+id/imageView"
         android:layout_width="300dp"
         android:layout_height="300dp"
         android:scaleType="centerInside"
@@ -58,63 +60,63 @@
         android:layout_width="match_parent"
         android:background="#DADADA"
         android:layout_height="2dp"/>
-    <RadioGroup
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:orientation="horizontal"
-        >
-        <View
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="match_parent"/>
-        <RadioButton
-            android:id="@+id/rb_comment"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:button="@null"
-            android:background="@drawable/comment_icon"
-            android:textColor="#00ff00"
+        android:layout_height="40dp">
+        <LinearLayout
             android:gravity="center"
-            android:checked="true"
-            android:layout_gravity="center_vertical"
-            />
-        <TextView
-            android:id="@+id/tv_comment_num"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="16sp"
-            android:layout_marginLeft="8dp"
-            android:layout_gravity="center_vertical"
-            android:text="0"/>
-        <View
             android:layout_width="0dp"
             android:layout_weight="1"
-            android:layout_height="match_parent"/>
-        <TextView
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/iv_comment"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_gravity="center"
+                android:src="@drawable/comment_icon"
+                />
+            <TextView
+                android:id="@+id/tv_comment_num"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="8dp"
+                android:text="2"/>
+        </LinearLayout>
+        <View
             android:layout_width="2dp"
-            android:layout_height="40dp"
-            android:background="#DADADA"
-            android:layout_gravity="center_vertical"
-            />
-        <View
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="match_parent"/>
-        <RadioButton
-            android:id="@+id/rb_zan"
-            android:layout_width="30dp"
             android:layout_height="30dp"
-            android:button="@null"
-            android:background="@drawable/love_icon"
-            android:gravity="center"
-            android:layout_gravity="center_vertical"
+            android:layout_gravity="center"
+            android:background="#DADADA"
             />
-        <View
+        <LinearLayout
             android:layout_width="0dp"
             android:layout_weight="1"
-            android:layout_height="match_parent"/>
-    </RadioGroup>
-    <TextView
+            android:gravity="center"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/iv_zan"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_gravity="center_vertical"
+                android:src="@drawable/love_icon"
+                />
+            <TextView
+                android:id="@+id/tv_zan"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="8dp"
+                android:text="8"/>
+        </LinearLayout>
+
+
+
+    </LinearLayout>
+    <View
         android:layout_width="match_parent"
         android:background="#DADADA"
         android:layout_height="2dp"/>

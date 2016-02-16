@@ -1,10 +1,9 @@
 package com.pxy.studyhelper.entity;
 
-import com.bmob.BmobProFile;
-
-import java.util.Date;
+import java.io.Serializable;
 
 import cn.bmob.v3.BmobObject;
+import cn.bmob.v3.datatype.BmobFile;
 
 /**
  * User: Pxy(15602269883@163.com)
@@ -12,19 +11,19 @@ import cn.bmob.v3.BmobObject;
  * Time: 23:07
  * FIXME
  */
-public class Topic  extends BmobObject {
-    private String  userId;
+public class Topic  extends BmobObject implements Serializable{
+    private String  userName;
     private String  content;
-    private BmobProFile  image;
+    private BmobFile image;
     private int love;
-    private Date  createAt;
+    private String  headUrl;
 
-    public String getUserId() {
-        return userId;
+    public String getUserName() {
+        return userName;
     }
 
-    public void setUserId(String userId) {
-        this.userId = userId;
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
     public String getContent() {
@@ -35,11 +34,11 @@ public class Topic  extends BmobObject {
         this.content = content;
     }
 
-    public BmobProFile getImage() {
+    public BmobFile getImage() {
         return image;
     }
 
-    public void setImage(BmobProFile image) {
+    public void setImage(BmobFile image) {
         this.image = image;
     }
 
@@ -51,22 +50,21 @@ public class Topic  extends BmobObject {
         this.love = love;
     }
 
-    public Date getCreateAt() {
-        return createAt;
+    public String getHeadUrl() {
+        return headUrl;
     }
 
-    public void setCreateAt(Date createAt) {
-        this.createAt = createAt;
+    public void setHeadUrl(String headUrl) {
+        this.headUrl = headUrl;
     }
 
     @Override
     public String toString() {
         return "Topic{" +
-                "userId='" + userId + '\'' +
+                "userName='" + userName + '\'' +
                 ", content='" + content + '\'' +
-                ", image=" + image +
                 ", love=" + love +
-                ", createAt=" + createAt +
+                ", headUrl='" + headUrl + '\'' +
                 '}';
     }
 }

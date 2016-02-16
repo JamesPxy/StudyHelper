@@ -53,7 +53,7 @@ public class GetExamDataBiz {
         bmobQuery.findObjects(context, new FindListener<Test>() {
             @Override
             public void onSuccess(List<Test> object) {
-                Tools.ShowLog("getexamdata","success--size--"+object.size());
+                LogUtil.e("get exam data success--size--"+object.size());
                 TestListActivity testListActivity = (TestListActivity) context;
                 testListActivity.setListView(object);
             }

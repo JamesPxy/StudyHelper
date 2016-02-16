@@ -1,8 +1,7 @@
 package com.pxy.studyhelper.entity;
 
-import java.util.Date;
-
 import cn.bmob.v3.BmobObject;
+import cn.bmob.v3.datatype.BmobDate;
 
 /**
  * User: Pxy(15602269883@163.com)
@@ -10,12 +9,15 @@ import cn.bmob.v3.BmobObject;
  * Time: 23:11
  * 用户评论表
  * FIXME
+ * BmobObject类本身包含objectId、createdAt、updatedAt、ACL四个默认的属性，
+ * objectId是数据的唯一标示，相当于数据库中表的主键，createdAt是数据的创建时间，
+ * updatedAt是数据的最后修改时间，ACL是数据的操作权限。
  */
 public class Comment  extends BmobObject {
     private String  topicId;
     private String  userId;
     private String  content;
-    private Date  createAt;
+    private BmobDate  createdAt;
 
     public String getTopicId() {
         return topicId;
@@ -41,12 +43,13 @@ public class Comment  extends BmobObject {
         this.content = content;
     }
 
-    public Date getCreateAt() {
-        return createAt;
+    @Override
+    public String getCreatedAt() {
+        return createdAt.getDate();
     }
 
-    public void setCreateAt(Date createAt) {
-        this.createAt = createAt;
+    public void setCreatedAt(BmobDate createdAt) {
+        this.createdAt = createdAt;
     }
 
     @Override
@@ -55,7 +58,7 @@ public class Comment  extends BmobObject {
                 "topicId='" + topicId + '\'' +
                 ", userId='" + userId + '\'' +
                 ", content='" + content + '\'' +
-                ", createAt=" + createAt +
+                ", createdAt=" + createdAt.getDate() +
                 '}';
     }
 }

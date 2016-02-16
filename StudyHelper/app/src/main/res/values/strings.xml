@@ -30,6 +30,7 @@
     <string name="firstSee">精彩内容，先睹为快>></string>
     <string name="loginBtn">登录</string>
     <string name="section_format">Hello World from section: %1$d</string>
+    <string name="title_activity_main2">MainActivity2</string>
 
 
 </resources>

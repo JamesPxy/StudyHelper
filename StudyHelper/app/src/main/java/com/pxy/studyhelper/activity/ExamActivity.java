@@ -97,7 +97,7 @@ public class ExamActivity extends AppCompatActivity {
     private void initView() {
 
         new AlertDialog.Builder(this).setTitle("提示")
-                .setMessage("考试开始,考试时间为"+mTime+"分钟,加油!")
+                .setMessage("考试开始,考试时间为"+mTotalQusestion+"分钟,加油!")
                 .setIcon(R.drawable.ic_luncher)
                 .setPositiveButton("确定",null)
                 .show();
